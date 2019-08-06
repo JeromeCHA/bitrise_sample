@@ -33,10 +33,13 @@ android {
         production {
             dimension "default"
             applicationId 'com.test.production'
+            buildConfigField "String", "GCM_SENDER_ID", "11111111111111"
         }
         bitrise {
             dimension "default"
             applicationId 'com.test.bitrise'
+            buildConfigField "String", "GCM_SENDER_ID", "22222222222222"
+            buildConfigField "boolean", "IS_TEST", "true"
             buildConfigField "com.example.bitrisesample.Test", "test", "new com.example.bitrisesample.BitriseTest()"
         }
     }
