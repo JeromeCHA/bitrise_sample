@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -14,6 +13,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "com.example.bitrisesample.Test", "test", "new com.example.bitrisesample.ProductionTest()"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -68,12 +68,241 @@ android {
     }
 }
 
+// ライブラリのバージョン管理
+ext {
+    // Google
+    androidx_version = '1.0.0'
+    androidx_appcompat_version = '1.0.2'
+    androidx_biometric_version = '1.0.0-alpha03'
+    material_version = '1.1.0-alpha09'
+    multidex_version = '2.0.1'
+    multidex_instrumentation_version = '2.0.0'
+    constraint_layout_version = '2.0.0-beta1'
+
+    // Google Play
+    google_ads_version = '18.1.1'
+    google_maps_version = '17.0.0'
+    google_location_version = '17.0.0'
+
+    // Firebase
+    firebase_core_version = '17.1.0'
+    fcm_version = '20.0.0'
+
+    // Architecture Components
+    aac_version = '2.2.0-alpha03'
+    aac_viewmodel_version = '2.2.0-alpha03'
+    room_version = '2.2.0-alpha02'
+
+    // Android KTX
+    android_ktx_version = '1.0.2'
+
+    // Square
+    okhttp_version = '4.1.0'
+    threetenabp_version = '1.2.1'
+    disklrucache_version = '2.0.2'
+
+    // RxJava 2
+    rxjava2_version = '2.2.11'
+    rxandroid2_version = '2.1.1'
+    rxbinding3_version = '3.0.0'
+    rxkotlin_version = '2.4.0'
+
+    // View
+    photoview2_version = '2.3.0'
+    showcaseview_version = '5.4.3'
+    materialish_version = '1.7'
+    glide_version = '4.9.0'
+    ah_bottom_navigation = '2.3.4'
+    gif_drawable_version = '1.2.17'
+    flexbox_layout_version = '1.1.0'
+    shortcut_badger_version = '1.1.22@aar'
+    exoplayer_verion = '2.10.4'
+    subsampling_scale_image_view_version = '3.10.0'
+    android_pdf_viewer_version = '3.2.0-beta.1'
+
+    // Utils
+    gson_version = '2.8.5'
+    kve_version = '2.3.0'
+    permissions_dispatcher_version = '4.5.0'
+    ucrop_version = '2.2.0'
+    json_simple_version = '1.1.1'
+    on_activity_result_version = '0.7.0'
+    juniversalchardet_version = '2.3.0'
+    re2j_version = '1.3'
+    libphonenumber_version = '8.10.16'
+    conceal_version = '2.0.2@aar'
+
+    // Development
+    deploygate_version = '4.1.0'
+    crashlytics_version = '2.10.1'
+    stetho_version = '1.5.1'
+    td_version = '0.2.0'
+
+    // Live
+    agora_version = '2.8.1'
+
+    // Kotlin
+    kotlin_coroutines_version = '1.2.1'
+
+    // Test
+    truth_version = '1.0'
+    robolectric_version = '4.3'
+    junit_version = '4.12'
+
+    // Ad
+    mopub_version = '5.8.0'
+
+    // Adjust
+    adjust_version = '4.18.0'
+    installreferrer_version = '1.0'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Support library
+    implementation "androidx.legacy:legacy-support-v4:$androidx_version"
+    implementation "androidx.appcompat:appcompat:$androidx_appcompat_version"
+    implementation "androidx.cardview:cardview:$androidx_version"
+    implementation "androidx.recyclerview:recyclerview:$androidx_version"
+    implementation "androidx.browser:browser:$androidx_version"
+    implementation "androidx.preference:preference:$androidx_version"
+    implementation "androidx.legacy:legacy-preference-v14:$androidx_version"
+    implementation "androidx.exifinterface:exifinterface:$androidx_version"
+    implementation "androidx.biometric:biometric:$androidx_biometric_version"
+    implementation "com.google.android.material:material:$material_version"
+
+    // Constraint Layout
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+
+    // Architecture Components
+    implementation "androidx.lifecycle:lifecycle-extensions:$aac_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$aac_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$aac_viewmodel_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$aac_viewmodel_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // Google Play
+    implementation "com.google.android.gms:play-services-maps:$google_maps_version"
+    implementation "com.google.android.gms:play-services-location:$google_location_version"
+    implementation "com.google.android.gms:play-services-ads:$google_ads_version"
+
+    // Firebase
+    implementation "com.google.firebase:firebase-core:$firebase_core_version"
+    implementation "com.google.firebase:firebase-messaging:$fcm_version"
+
+    // Google
+    implementation "androidx.multidex:multidex:$multidex_version"
+    implementation "androidx.multidex:multidex-instrumentation:$multidex_instrumentation_version"
+    implementation "androidx.core:core-ktx:$android_ktx_version"
+
+    // Square
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.jakewharton.threetenabp:threetenabp:$threetenabp_version"
+    implementation "com.jakewharton:disklrucache:$disklrucache_version"
+
+    // RxJava 2
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava2_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid2_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+    implementation "com.jakewharton.rxbinding3:rxbinding:$rxbinding3_version"
+    implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:$rxbinding3_version"
+    implementation "com.jakewharton.rxbinding3:rxbinding-viewpager:$rxbinding3_version"
+
+    // View
+    //implementation "com.github.chrisbanes:PhotoView:$photoview2_version"
+    implementation "com.davemorrissey.labs:subsampling-scale-image-view:$subsampling_scale_image_view_version"
+    implementation "com.github.amlcurran.showcaseview:library:$showcaseview_version"
+    implementation "com.pnikosis:materialish-progress:$materialish_version"
+    implementation("com.github.bumptech.glide:glide:$glide_version@aar") {
+        transitive = true
+    }
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$glide_version@aar"
+    implementation "com.aurelhubert:ahbottomnavigation:$ah_bottom_navigation"
+    implementation "pl.droidsonroids.gif:android-gif-drawable:$gif_drawable_version"
+    implementation "com.google.android:flexbox:$flexbox_layout_version"
+    implementation "me.leolin:ShortcutBadger:$shortcut_badger_version"
+    implementation "com.github.barteksc:android-pdf-viewer:$android_pdf_viewer_version"
+
+    // ExoPlayer
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer_verion"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayer_verion"
+
+    // Utils
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:$kve_version"
+    implementation "com.yalantis:ucrop:$ucrop_version"
+    implementation("com.googlecode.json-simple:json-simple:$json_simple_version") {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.hamcrest', module: 'hamcrest-core'
+    }
+    implementation "com.vanniktech:onactivityresult:$on_activity_result_version"
+    kapt "com.vanniktech:onactivityresult-compiler:$on_activity_result_version"
+    implementation "com.github.albfernandez:juniversalchardet:$juniversalchardet_version"
+    implementation "com.google.re2j:re2j:$re2j_version"
+    implementation "io.michaelrocks:libphonenumber-android:$libphonenumber_version"
+    implementation ("com.facebook.conceal:conceal:$conceal_version") {
+        exclude group: 'com.facebook.soloader', module: 'soloader'
+    }
+    implementation "com.treasuredata:td-android-sdk:$td_version"
+
+    // Permissions Dispatcher
+    implementation("org.permissionsdispatcher:permissionsdispatcher:$permissions_dispatcher_version") {
+        exclude module: "support-v13"
+    }
+    kapt "org.permissionsdispatcher:permissionsdispatcher-processor:$permissions_dispatcher_version"
+
+    // Development
+    debugImplementation "com.deploygate:sdk:$deploygate_version"
+    releaseImplementation "com.deploygate:sdk-mock:$deploygate_version"
+    implementation("com.crashlytics.sdk.android:crashlytics:$crashlytics_version@aar") {
+        transitive = true
+    }
+    debugImplementation("com.facebook.stetho:stetho:$stetho_version") {
+        exclude group: "com.google.code.findbugs"
+    }
+
+    // Live
+    implementation "io.agora.rtc:full-sdk:$agora_version"
+
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$kotlin_coroutines_version"
+
+    // Ad
+    implementation("com.mopub:mopub-sdk-native-static:$mopub_version@aar") {
+        transitive = true
+        exclude module: 'libAvid-mopub'
+        exclude module: 'moat-mobile-app-kit'
+    }
+
+    // Adjust
+    implementation "com.adjust.sdk:adjust-android:$adjust_version"
+    implementation "com.android.installreferrer:installreferrer:$installreferrer_version"
+
+    // Test
+    testImplementation("com.google.truth:truth:$truth_version") {
+        exclude group: "com.google.guava", module: "listenablefuture"
+        exclude group: "com.google.auto.value", module: "auto-value-annotations"
+    }
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+    testImplementation("junit:junit:$junit_version") { exclude module: "hamcrest-core" }
+
+    // Instrumented Test
+    androidTestImplementation("com.google.truth:truth:$truth_version") {
+        exclude group: "com.google.guava", module: "listenablefuture"
+        exclude group: "com.google.auto.value", module: "auto-value-annotations"
+    }
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.2.0') {
+        exclude module: "support-annotations"
+    }
+    androidTestImplementation('androidx.test:runner:1.2.0') {
+        exclude module: "support-annotations"
+    }
 }
